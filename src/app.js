@@ -48,7 +48,11 @@ app.post("/register",async(req,res)=>{
         const token = await RegisterEMP.generateToken();
         console.log("token generated:"+token);
 
-
+        res.cookie("jwt", token,{
+            expires:new Date(Date.now() + 60000),
+            httpOnly:true
+        });
+        console.log("cookie:"+cookie);
 
         const created = await RegisterEMP.save();
         console.log("Registerd part:"+created);
@@ -77,7 +81,13 @@ app.post("/login",async(req,res)=>{
         console.log(login);
 
      const token = await usermail.generateToken();
-        console.log("token generated:"+token);    
+        console.log("token generated:"+token);  
+
+        res.cookie("jwt", token,{
+            expires:new Date(Date.now() + 60000),
+            httpOnly:true
+            //secure:true "which is works on https connection only"
+        }); 
 
     if(login == true)
     {
