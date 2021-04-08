@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/Employregister",{
+mongoose.connect(`mongodb://${process.env.db_host}:${process.env.port_Number}/${process.env.db_name}`,{
     useCreateIndex:true,
     useFindAndModify:false,
     useNewUrlParser:true,
